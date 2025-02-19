@@ -10,7 +10,7 @@
     tools:context=".Cadastro">
 
     <EditText
-        android:id="@+id/editNome"
+        android:id="@+id/cNome"
         android:layout_width="290dp"
         android:layout_height="60dp"
         android:layout_marginStart="72dp"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/cEmail"
         android:layout_width="290dp"
         android:layout_height="60dp"
         android:layout_marginStart="72dp"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextPhone"
+        android:id="@+id/cFone"
         android:layout_width="290dp"
         android:layout_height="60dp"
         android:layout_marginStart="72dp"
@@ -49,10 +49,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/cSalvar"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="172dp"
+        android:layout_marginStart="108dp"
         android:layout_marginBottom="208dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,4 +67,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/contatos" />
+
+    <Button
+        android:id="@+id/cVoltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voltar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.695" />
 </androidx.constraintlayout.widget.ConstraintLayout>
