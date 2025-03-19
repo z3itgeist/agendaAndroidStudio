@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 bancoDados.execSQL("CREATE TABLE IF NOT EXISTS agenda(codigo INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, email VARCHAR, fone VARCHAR )");
                 bancoDados.execSQL("INSERT INTO agenda(nome,email,fone) VALUES ('Yasmin','yasmin@email.com','19919191919')");
 
+                /*Primeiro teste de conexão de banco de dados, inserimos manualmente os dados para teste
                 Cursor cursor = bancoDados.rawQuery("SELECT codigo, nome, email,fone from agenda", null);
                     int indiceCodigo = cursor.getColumnIndex("codigo");
                     int indiceNome = cursor.getColumnIndex("nome");
@@ -62,10 +63,11 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("Resultado - fone: ", cursor.getString(indiceFone));
 
                             cursor.moveToNext();
-                    }
+                    }*/
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
 
 
 
