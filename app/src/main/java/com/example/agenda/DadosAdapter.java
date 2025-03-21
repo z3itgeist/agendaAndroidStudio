@@ -1,5 +1,6 @@
 package com.example.agenda;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class DadosAdapter extends RecyclerView.Adapter<> {
+public class DadosAdapter extends RecyclerView.Adapter<DadosAdapter.DadosViewHolder> {
 
     private ArrayList<Contato> lista;
 
@@ -18,8 +19,10 @@ public class DadosAdapter extends RecyclerView.Adapter<> {
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public DadosAdapter.DadosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item,parent,false);
+        return new DadosViewHolder(itemView);
     }
 
     @Override

@@ -15,10 +15,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private SQLiteDatabase bancoDados;
+
+    private RecyclerView recyclerViewDados;
+
+    private DadosAdapter dadosAdapter;
+
+    private ArrayList<Contato> listaDados;
+
 
 
     @Override
@@ -29,6 +40,17 @@ public class MainActivity extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+
+                recyclerViewDados = findViewById(R.id.recyclerViewDados);
+
+                criarBancoDados();
+
+                recyclerViewDados.setLayoutManager(new LinearLayoutManager(this));
+                listaDados = new ArrayList<>();
+                dadosAdapter = new DadosAdapter(listarDados);
+                recyclerViewDados.setAdapter(dadosAdapter);
+
+                listarDados();
 
 
             ImageView btnCad = findViewById(R.id.btnCad);
@@ -41,14 +63,14 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(telaCadastro);
                 }
             });
-
+            /*Primeiro teste de conexão de banco de dados, inserimos manualmente os dados para teste
             try{
                 bancoDados = openOrCreateDatabase("crudapp", MODE_PRIVATE, null);
 
                 bancoDados.execSQL("CREATE TABLE IF NOT EXISTS agenda(codigo INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, email VARCHAR, fone VARCHAR )");
                 bancoDados.execSQL("INSERT INTO agenda(nome,email,fone) VALUES ('Yasmin','yasmin@email.com','19919191919')");
 
-                /*Primeiro teste de conexão de banco de dados, inserimos manualmente os dados para teste
+
                 Cursor cursor = bancoDados.rawQuery("SELECT codigo, nome, email,fone from agenda", null);
                     int indiceCodigo = cursor.getColumnIndex("codigo");
                     int indiceNome = cursor.getColumnIndex("nome");
@@ -63,16 +85,61 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("Resultado - fone: ", cursor.getString(indiceFone));
 
                             cursor.moveToNext();
-                    }*/
+                    }
             } catch (Exception e) {
                 e.printStackTrace();
-            }
-
-
-
-
+            }*/
 
             return insets;
         });
     }
+
+    public void criarBancoDados() {
+        try{
+            bancoDados = openOrCreateDatabase("crudapp", MODE_PRIVATE, null);
+
+            bancoDados.execSQL("CREATE TABLE IF NOT EXISTS agenda(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "nome VARCHAR, email VARCHAR, fone VARCHAR)");
+            bancoDados.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        public void listarDados() {
+            try {
+                bancoDados = openOrCreateDatabase("crudapp", MODE_PRIVATE, null);
+
+                Cursor meuCursor = bancoDados.rawQuery("SELECT id, nome, email, fone FROM agenda", null);
+                listaDados.clear();
+
+                while (meuCursor.moveToNext()){
+                    int id = meuCursor.getInt(0);
+                    String nome = meuCursor.getString(1);
+                    String email = meuCursor.getString(2);
+                    String fone = meuCursor.getString(3);
+
+                        listaDados.add(new Contato(id, nome, email, fone));
+                }
+
+                dadosAdapter.notifyDataSetChanged();
+                bancoDados.close();
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onResume(){
+            super.onResume();
+            listarDados();
+        }
+
+    }
+
+
+
+
+
 }

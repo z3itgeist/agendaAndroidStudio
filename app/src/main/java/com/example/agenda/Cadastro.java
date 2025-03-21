@@ -81,7 +81,7 @@ public class Cadastro extends AppCompatActivity {
 
     public void cadastrar(){
         try {
-            bancoDados = openOrCreateDatabase(("crudapp",MODE_PRIVATE, null));
+            bancoDados = openOrCreateDatabase("crudapp", MODE_PRIVATE, null);
             String sql = "INSERT INTO agenda (nome,email, fone) VALUES (?,?,?)";
             SQLiteStatement stmt = bancoDados.compileStatement(sql);
             stmt.bindString(1, nome.getText().toString());
