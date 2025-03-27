@@ -41,17 +41,16 @@ public class MainActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 
-                recyclerViewDados = findViewById(R.id.recyclerViewDados);
+                recyclerViewDados = findViewById(R.id.RecyclerView);
 
                 criarBancoDados();
 
                 recyclerViewDados.setLayoutManager(new LinearLayoutManager(this));
                 listaDados = new ArrayList<>();
-                dadosAdapter = new DadosAdapter(listarDados);
+                dadosAdapter = new DadosAdapter(listaDados);
                 recyclerViewDados.setAdapter(dadosAdapter);
 
                 listarDados();
-
 
             ImageView btnCad = findViewById(R.id.btnCad);
 
@@ -103,9 +102,9 @@ public class MainActivity extends AppCompatActivity {
             bancoDados.close();
         } catch (Exception e){
             e.printStackTrace();
-        }
+        }}
 
-        public void listarDados() {
+        public void listarDados(){
             try {
                 bancoDados = openOrCreateDatabase("crudapp", MODE_PRIVATE, null);
 
@@ -137,9 +136,3 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-
-
-
-
-}
